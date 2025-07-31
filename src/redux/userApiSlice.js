@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 export const userApiSlice=createApi({
     reducerPath:"authApi",
     baseQuery:fetchBaseQuery({
-        baseUrl:"https://task-management-with-auth.onrender.com/",
+        baseUrl:"https://task-management-with-auth-bk5rjlm17-nsrksreecharans-projects.vercel.app/",
         prepareHeaders:(headers)=>{
             
             headers.set("Content-Type", "application/json");
