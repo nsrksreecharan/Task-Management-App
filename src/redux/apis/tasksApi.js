@@ -1,0 +1,86 @@
+import { apiSlice } from "../apiSlice";
+
+const tasksApi=apiSlice.injectEndpoints({
+    endpoints:(builder)=>({
+        createTask:builder.mutation({
+            query:(task)=>({
+                url:"/task-api/",
+                method:"POST",
+                body:task
+            }),
+            invalidatesTags:["Task"],
+        }),
+        getAllTasks:builder.query({
+            query:()=>({
+                url:"/task-api/",
+                method:"GET",
+            }),
+            validateTags:["Task"],
+        }),
+        getUserStats:builder.query({
+            query:()=>({
+                url:"/task-api/user-stats",
+                method:"GET",
+            }),
+            validateTags:["Task"],
+        }),
+        getUserInfo:builder.query({
+            query:()=>({
+                url:"/task-api/user-info",
+                method:"GET",
+            }),
+            validateTags:["Task"],
+        }),
+        updateTaskById:builder.mutation({
+            query:(data)=>({
+                url:`/task-api/${data?.id}`,
+                method:"PUT",
+                body:data?.task
+            }),
+            invalidatesTags:["Task"]
+        }),
+        
+        updateTaskMany:builder.mutation({
+            query:(data)=>({
+                url:`/task-api/`,
+                method:"PUT",
+                body:data,
+            }),
+            invalidatesTags:["Task"]
+        }),
+        getTaskById:builder.query({
+            query:(id)=>({
+                url:`/task-api/${id}`,
+                method:"GET"
+            }),
+            validateTags:["Task"],
+        }),
+        deleteTaskById:builder.mutation({
+            query:(id)=>({
+                url:`/task-api/${id}`,
+                method:"DELETE"
+            }),
+            invalidatesTags:["Task"],
+        }),
+        deleteTasksMany:builder.mutation({
+            query:(data)=>({
+                url:`/task-api/`,
+                method:"DELETE",
+                body:data,
+            }),
+            invalidatesTags:["Task"]
+        }),
+    }),
+});
+
+export const {
+    useCreateTaskMutation,
+    useGetAllTasksQuery,
+    useGetUserStatsQuery,
+    useGetUserInfoQuery,
+    useDeleteTaskByIdMutation,
+    useGetTaskByIdQuery,
+    useUpdateTaskByIdMutation,
+    useUpdateTaskManyMutation,
+    useDeleteTasksManyMutation
+}=tasksApi;
